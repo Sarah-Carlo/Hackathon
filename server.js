@@ -1,8 +1,9 @@
 const express = require("express");
 const cors = require("cors");
-const db = require("./db"); // your db file name
+const db = require("./db");
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
@@ -22,9 +23,10 @@ app.get("/universities", (req, res) => {
   });
 });
 
-// Filter by country (optional but cool)
+// Filter by country
 app.get("/universities/country/:country", (req, res) => {
   const country = req.params.country;
+
   db.all(
     "SELECT * FROM universities WHERE Country = ?",
     [country],
@@ -38,11 +40,8 @@ app.get("/universities/country/:country", (req, res) => {
   );
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-const cors = require("cors");
-app.use(cors());
-npm install cors
-
